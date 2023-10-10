@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fuggles&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fuggles&display=swap"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js" defer></script>
+    <script src="fetch.js" defer></script>
+    <script src="audios.js" defer></script>
+    <title>Cards Memory Game</title>
+  </head>
+  <body>
+    <div id="board" class="board">
+      <div class="gamebuttons" id="gameButtons">
+        <button id="restartButton2"><b>🃝 MAIN MENU 🃟</b></button>
+        <button class='playPause1' id="playPause"><b>◁</b></button>
+        <button class="playNext" id="next"><b>☛</b></button>
+        <button id="soundsToggle"><b>🔊 SOUNDS </b></button>
+      </div>
+      <!-- <button id="fullscreen-button"><b>Fullscreen</b></button> -->
+      <img src="img/TV.png" id="fullscreen"></img>
+    </div>
+    <div class="scorePlayers" id="scoreP">
+      <div class="playerOne" id="pOne"></div>
+      <div class="playerTwo" id="PTwo"></div>
+      <div id="playerTurn"></div>
+      </div>
+      <div class="timeDis" id="showTimer">
+        <div id="timeDisplay">00:00</div>
+      </div>
+    <div class="starting-message" id="startingMessage">
+      <div class="text-container">
+        <h2>🀨Memory Game🀢</h2>
+      </div>
+      <div data-starting-message-text></div>
+      <button id="harryBut" onclick="fetchCharacterData();">
+        <b>Harry Potter</b>
+      </button>
+      <button id="dogsBut" onclick="fetchDogImages();"><b>Dogs</b></button>
+      <button id="flagsBut" onclick="fetchRandomMovies();">
+        <b>Movies</b>
+      </button>
+      <button id="pokBut" onclick="fetchRickAndMortyData();">
+        <b>Rick And Morty</b>
+      </button>
+      <button id="lionK" onclick="lionKing();">
+        <b>Lion King</b>
+      </button>
+      <button id="aladdin" onclick="aladdin();">
+        <b>Aladdin</b>
+      </button>
+      <button id="jungle" onclick="jungleBook();">
+        <b>Jungle Book</b>
+      </button>
+      <button id="alice" onclick="aliceIn();">
+        <b>Alice In Wonderland</b>
+      </button>
+      <button id="randomG" onclick="randomGame();">
+        <b>Random</b>
+      </button>
+      <img src="img/TV.png" id="fullscreen2">
+    </img>
+    <div class="choosePlayers" id="chooseP">
+      <!-- <div class="chooseP">CHOOSE GAME MODE:</div> -->
+      <button class="playAlone">🀨Play Alone🀢</button>
+      <button class="playWithF">🀨Play Thogeter🀢</button>
+      </div>
+    </div>
+    <div class="winning-message" id="winningMessage">
+      <div class="text-container2">
+        <h1>🀤You Did It🀩</h1>
+        <h2></h2>
+      </div>
+      <div data-winning-message-text></div>
+      <button id="restartButton"" onclick="restartGame();">
+        <b>Restart</b>
+      </button>
+      <button class="mainM" id="mainMenu">
+        <b>Main Menu</b>
+      </button>
+      <button class="scoreTimer" id="Timerscore">
+        <b>Your Time: <span id="timerScorePlaceholder"></span></b>
+      </button>      
+    </div>
+    <div id="nameModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Enter Player Names</h2>
+        <form id="nameForm">
+          <label for="player1Name">Player 1 Name:</label>
+          <input type="text" id="player1Name" required>
+          <br>
+          <br>
+          <label for="player2Name">Player 2 Name:</label>
+          <input type="text" id="player2Name" required>
+          <br>
+          <br>
+          <input type="submit" value="❀Allright❀">
+        </form>
+      </div>
+    </div>
+    
+    <!-- <audio id="hpMatchSound" controls style="display: none;">
+      <source src="/audio/you're-a-wizard-harry.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio> -->
+    
+<!-- 
+<audio id="hpMatchSound" src="/audio/you're-a-wizard-harry.mp3" preload="auto"></audio>
+<audio id="dogsSound" src="/audio/dogs-sound.mp3" preload="auto"></audio>
+<audio id="moviesSound" src="/audio/movies-sound.mp3" preload="auto"></audio> -->
+
+  </body>
+</html>

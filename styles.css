@@ -1,0 +1,712 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --cell-size: 140px;
+  --card-size: calc(var(--cell-size) * 0.95);
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  top: 0;
+  font-family: "Black Ops One", sans-serif;
+}
+
+.board {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(10, auto);
+  background-color: rgb(116, 107, 95);
+  background-size: cover; /* This will make the background image cover the entire container */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center center; /* Center the background image */
+  z-index: 1;
+}
+
+.card-cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Remove position: absolute; */
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  border-radius: 10%;
+  opacity: 0.5;
+  box-shadow: 0 0 15px rgba(165, 225, 228, 0.5);
+}
+
+.card-cell.flipped {
+  /* Rotate the card to 180 degrees when the 'flipped' class is applied */
+  transform: rotateY(180deg);
+  opacity: 1;
+}
+
+.card-cell:hover {
+  opacity: 1;
+}
+
+.back {
+  position: absolute;
+  width: calc(var(--card-size) * 1);
+  height: var(--card-size);
+  backface-visibility: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* z-index: 2; */
+  /* display: none; */
+  border-radius: 10%;
+  box-shadow: 0 0 15px rgba(40, 27, 87, 0.5);
+  background-image: url(/img/mem.png);
+}
+
+.front {
+  /* Define the size of the card */
+  width: calc(var(--card-size) * 1);
+  height: var(--card-size);
+  backface-visibility: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transform: rotateY(180deg); /* Rotate the back 180 degrees to hide it */
+  border-radius: 10%;
+  box-shadow: 0 0 10px rgba(1, 1, 91, 0.5);
+  filter: drop-shadow(0 0 0.1vmin #1d0450);
+  background-image: url(/img/mem.png);
+  /* z-index: 1; */
+}
+
+.gamebuttons {
+  background-color: #43205a90;
+  border-radius: 20%;
+  position: absolute;
+  bottom: -1.5vh;
+  border: 0.1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.gamebuttons:hover {
+  opacity: 0.8;
+}
+
+.gamebuttons.hide {
+  display: none;
+}
+
+#fullscreen {
+  height: 5rem;
+  width: 5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.5;
+}
+
+#fullscreen:hover {
+  height: 5rem;
+  width: 5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+}
+
+#fullscreen2 {
+  height: 5rem;
+  width: 5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.5;
+}
+
+#fullscreen2:hover {
+  height: 5rem;
+  width: 5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.gamebuttons button {
+  bottom: 0;
+  right: 0;
+  font-size: 2.2rem;
+  background: linear-gradient(
+    45deg,
+    #85f308,
+    #3d09e7
+  ); /* Replace with your desired gradient colors */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: none;
+  padding: 0.3em 3em;
+  cursor: url(/cursors/brain.cur), pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: "Luckiest Guy", cursive;
+  opacity: 1;
+  filter: drop-shadow(0 0 0.2vmin #4c0450);
+}
+.gamebuttons button:hover {
+  font-size: 2.2rem;
+  background: linear-gradient(
+    45deg,
+    #85f308,
+    #b52edf
+  ); /* Replace with your desired gradient colors */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: none;
+  padding: 0.3em 3em;
+  cursor: url(/cursors/brain.cur), pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: "Luckiest Guy", cursive;
+  opacity: 1;
+  filter: drop-shadow(0 0 0.2vmin #4c0450);
+}
+
+/* 
+.cell.with-warning-styles {
+  filter: drop-shadow(0 0 1.2vmin #733a76);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+ */
+
+.winning-message {
+  margin-top: 10%;
+  margin-bottom: 20%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(232, 188, 127);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  flex-direction: column;
+  opacity: 0.6;
+  cursor: url(/cursors/brain.cur), pointer;
+}
+
+.winning-message {
+  /* Other properties */
+  margin-top: 10%;
+  margin-bottom: 20%;
+  animation: bounce 10s ease infinite;
+  opacity: 0.7;
+}
+
+.winning-message h2 {
+  font-size: 3rem;
+padding-left: 20%;
+  border-radius: 15%;
+  margin-left: 20%;
+  color: rgb(186, 255, 47);
+  position: relative;
+  background: rgba(13, 2, 86, 0.884);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 255, 0.3);
+  animation: glow3 2s infinite alternate;
+}
+
+@keyframes glow3 {
+  0% {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px 10px rgba(157, 0, 255, 0.5);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    margin-top: 10%;
+    margin-bottom: 50%;
+  }
+  50% {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.winning-message button {
+  font-size: 6rem;
+  background: linear-gradient(
+    45deg,
+    #0810f3,
+    #e79d09
+  ); /* Replace with your desired gradient colors */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: none;
+  padding: 0.3em 3em;
+  cursor: url(/cursors/brain.cur), pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: "Fuggles", sans-serif;
+  opacity: 1;
+}
+
+.winning-message button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    #ff00ff,
+    #00ffff,
+    #eeff00,
+    #6e0388
+  ); /* Same gradient as the text */
+  clip-path: polygon(30% 50%, 100% 0%, 80% 90%, 0% 100%);
+  border-radius: 60%;
+  z-index: -1;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.8s ease, opacity 0.3s ease;
+}
+
+.winning-message button:hover::before {
+  transform: translateX(0%);
+  /* transform: scale(1); */
+  opacity: 1;
+}
+
+.winning-message.show {
+  display: flex;
+}
+
+.starting-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(28, 2, 32);
+  /* background-color: rgba(42, 35, 184, 0.787); */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.8;
+  font-family: "Fuggles", sans-serif;
+  cursor: url(/cursors/brain.cur), pointer;
+}
+
+.starting-message button {
+  font-size: 3rem;
+  background: linear-gradient(
+    45deg,
+    #e79d09,
+    #9908f3
+  ); /* Replace with your desired gradient colors */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: none;
+  padding: 0.2em 3em;
+  cursor: url(/cursors/brain.cur), pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: "Fuggles", sans-serif;
+  opacity: 1;
+}
+
+.choosePlayers button {
+  font-size: 3rem;
+  background: linear-gradient(
+    45deg,
+    #1eb3d8,
+    #e78709
+  ); /* Replace with your desired gradient colors */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: none;
+  padding: 0.4em 3em;
+  cursor: url(/cursors/brain.cur), pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: "Fuggles", sans-serif;
+  opacity: 0.6;
+}
+
+.choosePlayers button:hover {
+  font-size: 4rem;
+  z-index: -1;
+}
+
+.choosePlayers button.active {
+  opacity: 1; /* Style for the active button */
+  /* Add any other styles you want */
+  text-shadow: 0 0 10px rgba(255, 215, 9); /* Apply the glow effect to the text */
+  animation: glow 1s ease infinite; /* Apply the animation to the active button */
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px rgb(181, 255, 9); /* Start with a small glow around the text */
+  }
+  50% {
+    text-shadow: 0 0 20px rgb(181, 9, 255); /* Increase the glow size and intensity */
+  }
+  100% {
+    text-shadow: 0 0 10px rgb(91, 231, 222); /* Return to a small glow around the text */
+  }
+}
+
+.starting-message button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    #ff00ff,
+    #00ffff,
+    #eeff00,
+    #6e0388
+  ); /* Same gradient as the text */
+  clip-path: polygon(30% 50%, 100% 0%, 80% 90%, 0% 100%);
+  border-radius: 60%;
+  z-index: -1;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.starting-message button:hover::before {
+  transform: translateX(1%);
+  /* transform: scale(1); */
+  opacity: 1;
+}
+
+.starting-message.show {
+  display: flex;
+}
+
+.text-container h2 {
+  margin: 0;
+  font-size: 6rem;
+  color: rgba(225, 225, 225, 0.01);
+  background-image: url("https://images.unsplash.com/photo-1463438690606-f6778b8c1d10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3087&q=80");
+  /* background-image: url("https://images.unsplash.com/photo-1499195333224-3ce974eecb47?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2cf549433129d4227d1879347b9e78ce&auto=format&fit=crop&w=1248&q=80"); */
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  animation: animate 25s ease-in-out infinite;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  /* font-family: "Black Ops One", sans-serif; */
+  font-family: "Permanent Marker", cursive;
+  /* font-family: 'Luckiest Guy', cursive; */
+}
+
+/* .text-container h5 {
+  margin: 0;
+  padding: 10px;
+  font-size: 28px;
+  left: 10%;
+  color: rgba(225, 225, 225, 0.01);
+  background-image: url("https://images.unsplash.com/photo-1463438690606-f6778b8c1d10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3087&q=80");
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  animation: animate 25s ease-in-out infinite;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-family: "Permanent Marker", cursive;
+  opacity: 0.7;
+}
+
+.text-container h5:hover {
+  opacity: 1;
+}
+
+.text-container h5.choose {
+  background-image: url("https://images.unsplash.com/photo-1597879995289-a5ef25133718?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3132&q=80");
+} */
+
+.text-container2 h1 {
+  margin: 0;
+  font-size: 150px;
+  color: rgba(225, 225, 225, 0.01);
+  background-image: url("https://images.unsplash.com/photo-1541661538396-53ba2d051eed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3027&q=80");
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  animation: animate 25s ease-in-out infinite;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  /* font-family: "Black Ops One", sans-serif; */
+  /* font-family: "Permanent Marker", cursive; */
+  font-family: "Luckiest Guy", cursive;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    background-position: left top;
+  }
+  25% {
+    background-position: right bottom;
+  }
+  50% {
+    background-position: left bottom;
+  }
+  75% {
+    background-position: right top;
+  }
+}
+
+.timeDis {
+  background: #29057282;
+  color: #e79d09;
+  /* border: 1px solid black; */
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  padding: 10px;
+  display: block;
+  text-align: center;
+  position: absolute;
+  margin: 8px;
+  top: 0;
+  right: 5px;
+  z-index: 1;
+  column-count: 1;
+  column-width: 200px;
+  opacity: 1;
+}
+
+.timeDis:hover {
+  opacity: 0.9;
+  border: 1px solid rgb(168, 250, 43);
+  background: linear-gradient(45deg, #7a0d8d, #673ab7);
+  animation: glow1 1s infinite alternate, fade 1s alternate;
+}
+
+@keyframes glow1 {
+  0% {
+    box-shadow: 0 0 10px 5px rgba(131, 75, 131, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px 10px rgba(127, 11, 127, 0.7);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+.timeDis.hide {
+  display: none;
+}
+
+.scorePlayers {
+  background: #1d045082;
+  color: #e79d09;
+  border: 1px solid black;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  padding: 10px;
+  display: block;
+  position: absolute;
+  margin: 8px;
+  top: 0;
+  left: 5px;
+  z-index: 1;
+  column-count: 3;
+  column-width: 200px;
+}
+
+.scorePlayers.hide {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: linear-gradient(45deg, #f06, #9f6, #f90, #09f);
+  background-size: 400% 400%;
+  animation: modalAnimation 1s ease, gradientAnimation 3s linear infinite; /* Combined animations */
+  transform: rotate(0deg);
+  transition: display 5.5s;
+  animation-timing-function: ease-in-out;
+  opacity: 0.85;
+}
+
+/* Keyframes for the modal animation */
+@keyframes modalAnimation {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(50deg); /* Initial rotation is 0 degrees */
+    background-image: linear-gradient(45deg, #f06, #9f6); /* Initial gradient */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(360deg); /* Rotate 360 degrees for a spin effect */
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 0, 102, 0.89),
+      rgba(153, 255, 102, 0.689),
+      rgba(255, 153, 0, 0.593),
+      rgba(0, 153, 255, 0.588),
+      rgba(0, 255, 153, 0.67),
+      rgba(153, 0, 255, 0.569),
+      rgba(255, 0, 102, 0.579)
+    ); /* Rainbow gradient */
+  }
+}
+
+/* Keyframes for the gradient animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.modal-content {
+  color: #6d0572;
+  background-color: #cef7b0;
+  border-radius: 5%;
+  margin: 15% auto;
+  padding: 52px;
+  border: 2px solid #87ecdf;
+  width: 45%;
+  text-align: center;
+}
+
+.close {
+  color: #8707ff;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ed7f25;
+}
+
+/* Style for text input fields */
+input[type="text"] {
+  width: 100%;
+  background-color: rgba(240, 128, 128, 0.482);
+  color: rebeccapurple;
+  padding: 10px;
+  border: 1px solid #033b10;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+  background-color: #a260cb; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 15px 20px; /* Padding for the button */
+  border-radius: 5px;
+  cursor: pointer; /* Cursor on hover */
+}
+
+/* Hover effect for the submit button */
+input[type="submit"]:hover {
+  background-color: #d293ef;
+}
+
+.playNext::before {
+  font-size: 1.2rem;
+  opacity: 0.7;
+  content: "next song";
+  display: none; /* Initially hide the content */
+  margin-left: 5px; /* Add some spacing */
+}
+
+.playNext:hover::before {
+  display: inline; /* Display the content when the button is hovered */
+}
+
+/* Add this CSS for animation */
+/* Add this CSS for animation */
+.back-animation {
+  animation-name: spinAndSpark;
+  animation-duration: 1s; /* Adjust the duration as needed */
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite; /* Make it continuous */
+  transform-origin: center;
+  transform: scale(1);
+  color: linear-gradient(45deg, #f06, #9f6, #f90, #09f);
+}
+
+@keyframes spinAndSpark {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    filter: brightness(2); /* Adjust brightness as needed */
+  }
+}
